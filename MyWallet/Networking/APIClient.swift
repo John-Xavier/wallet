@@ -7,14 +7,33 @@
 
 import Foundation
 
+protocol NFTServiceProtocol {
+    func fetchProducts() async throws -> [NFT]
+    func fetchMyNFTs() async throws -> [NFT]
+    func fetchWallet() async throws -> [Coin]
+    func buyNFT(id: String) async throws
+}
+
+enum Route: Hashable {
+    case nftDetail(NFT)
+    case createNFT
+}
+
 actor APIClient {
     static let shared = APIClient()
     private let session: URLSession = .shared
     
+    private let decoder: JSONDecoder = {
+        let d = JSONDecoder()
+       d.dateDecodingStrategy = .iso8601
+       return d
+   }()
+
+    
     func request<T: Decodable>(_ endpoint:Endpoint, as type: T.Type) async throws -> T {
         let data = try await perform(endpoint)
         do {
-            return try JSONDecoder().decode(T.self, from: data)
+            return try decoder.decode(T.self, from: data)
         } catch {
             throw APIError.decoding(error)
         }
@@ -27,6 +46,12 @@ actor APIClient {
     }
     
     private func perform(_ endpoint:Endpoint) async throws -> Data {
+        
+        if Config.useMockData, let mock = MockData.data(for: endpoint) {
+            try await Task.sleep(for: .milliseconds(400))
+            return mock
+        }
+        
         var components = URLComponents(url: Config.baseURL.appendingPathComponent(endpoint.path), resolvingAgainstBaseURL: false)!
         components.queryItems = endpoint.queryItems
         
@@ -54,6 +79,9 @@ actor APIClient {
         guard let http = response as? HTTPURLResponse else {
             throw APIError.invalidResponse
         }
+        
+        print("STATUS:", http.statusCode)
+        print("BODY:", String(data: data, encoding: .utf8)?.prefix(300) ?? "nil")
         
         if let serverError = try? JSONDecoder().decode(ServerErrorResponse.self, from: data) {
             throw APIError.server(serverError.error)
