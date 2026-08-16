@@ -34,11 +34,30 @@ extension LinearGradient {
 }
 
 enum Metrics {
-    static let cardRadius: CGFloat   = 10
-    static let imageRadius: CGFloat  = 16
+    static let cardRadius: CGFloat  = 10
+    static let imageRadius: CGFloat = 4
     static let buttonRadius: CGFloat = 68
     static let gridSpacing: CGFloat  = 16
     static let padding: CGFloat      = 16
     static let topCardPadding: CGFloat = 20
     static let heroPadding: CGFloat  = 24
+}
+
+extension Font {
+    static func poppins(_ size: CGFloat, _ weight: Weight = .regular) -> Font {
+        let name: String
+        switch weight {
+        case .medium:   name = "Poppins-Medium"
+        case .semibold: name = "Poppins-SemiBold"
+        default:        name = "Poppins-Regular"
+        }
+        return .custom(name, size: size)
+    }
+
+    static func spaceGrotesk(_ size: CGFloat) -> Font {
+        .custom("SpaceGrotesk-Bold", size: size)
+    }
+
+    static let nftTitle   = poppins(20, .medium)
+    static let priceValue = spaceGrotesk(20)
 }

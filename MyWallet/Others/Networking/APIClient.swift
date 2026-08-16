@@ -8,6 +8,7 @@
 import Foundation
 
 protocol NFTServiceProtocol {
+    func createNFT(image: Data, title:String, description: String, price: String) async throws
     func fetchProducts() async throws -> [NFT]
     func fetchMyNFTs() async throws -> [NFT]
     func fetchWallet() async throws -> [Coin]

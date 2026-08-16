@@ -39,3 +39,19 @@ struct NFT: Decodable, Identifiable, Hashable {
         case title, description, price, currency, owner, imageUrl, available, purchasedAt
     }
 }
+
+#if DEBUG
+extension NFT {
+    static let sample = NFT(
+        id: "691461156dc97f9ce2987299",
+        title: "Hypebest Apes B",
+        description: "Unique masterpiece",
+        price: 4.75,
+        currency: "USDT",
+        owner: "691461156dc97f9ce2987297",
+        imageUrl: "https://nodeapi.techbank.live/interview/uploads/seed/Robo.jpg",
+        available: true,
+        purchasedAt: nil
+    )
+}
+#endif

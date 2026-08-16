@@ -9,14 +9,38 @@ import SwiftUI
 
 struct BrandButton: View {
     
-    
+    let title: String
+    var isLoading = false
+    var isEnabled = true
+    let action: () -> Void
     
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button(action: action) {
+            ZStack {
+                HStack(spacing: 12) {
+                    Text(title)
+                    Image(systemName: "arrow.right")
+                }
+                .font(.poppins(18, .medium))
+                .opacity(isLoading ? 0 : 1)
+                
+                if isLoading {
+                    ProgressView()
+                        .tint(.white)
+                }
+                    
+            }
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity, minHeight: 60)
+            .background(LinearGradient.brandButton)
+            .clipShape(Capsule())
+            .opacity(isEnabled ? 1 : 0.5)
+        }
+        .disabled(!isEnabled || isLoading)
     }
 }
 
 #Preview {
-    BrandButton()
+    BrandButton(title: "Press", action: { })
 }

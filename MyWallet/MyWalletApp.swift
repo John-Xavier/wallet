@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct MyWalletApp: App {
+    @StateObject private var appState = AppState()
+    @StateObject private var router = Router()
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(appState)
+                .environmentObject(router)
+                .preferredColorScheme(.light)
+            
         }
     }
 }
