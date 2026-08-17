@@ -39,7 +39,7 @@ final class MyWalletsViewModel: ObservableObject {
             async let nfts = service.fetchMyNFTs().sorted {
                 ($0.purchasedAt ?? .distantFuture) > ($1.purchasedAt ?? .distantFuture)
             }
-            
+
             async let coins = service.fetchWallet()
             
             

@@ -13,9 +13,13 @@ actor APIClient {
     
     private let decoder: JSONDecoder = {
         let d = JSONDecoder()
-       d.dateDecodingStrategy = .iso8601
-       return d
-   }()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        d.dateDecodingStrategy = .formatted(formatter)
+        return d
+    }()
 
     
     func request<T: Decodable>(_ endpoint:Endpoint, as type: T.Type) async throws -> T {
