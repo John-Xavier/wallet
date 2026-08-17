@@ -122,5 +122,5 @@ struct CreateNFTView: View {
 }
 
 #Preview {
-    CreateNFTView(viewModel: CreateNFTViewModel(service: MockNFTService()))
+    CreateNFTView(viewModel: CreateNFTViewModel(service: MockNFTService(), appState: AppState()))
 }

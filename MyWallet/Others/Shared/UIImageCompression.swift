@@ -8,11 +8,7 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    
-    enum UploadFormat {
-        case jpeg, png
-    }
-    
+
     func resized(maxDimension: CGFloat) -> UIImage {
         let longest = max(size.width, size.height)
         guard longest > maxDimension else {

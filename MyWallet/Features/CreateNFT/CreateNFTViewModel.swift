@@ -20,17 +20,19 @@ final class CreateNFTViewModel: ObservableObject {
     @Published var showSuccess = false
     @Published var errorMessage : AlertMessage?
     
+    private let appState: AppState
     private let service: NFTServiceProtocol
     
-    init(service: NFTServiceProtocol) {
+    init(service: NFTServiceProtocol, appState:AppState) {
         self.service = service
+        self.appState = appState
     }
     
     var canSubmit: Bool {
-        image != nil
+        guard let price = Double(price) else { return false}
+        return image != nil
         && !title.trimmingCharacters(in: .whitespaces).isEmpty
-        && Double(price) != nil
-        && Double(price)! > 0
+        && price > 0
     }
     
     func submit() async {
@@ -49,7 +51,7 @@ final class CreateNFTViewModel: ObservableObject {
                 description: description,
                 price: price
             )
-            
+            appState.walletNeedsRefresh = true
             showSuccess = true
             
         } catch {

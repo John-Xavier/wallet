@@ -45,7 +45,7 @@ struct RootView: View {
         case .nftDetail(let nft):
             NFTDetailView(nft: nft, viewModel: NFTDetailViewModel(service: service, appState: appState))
         case .createNFT:
-            CreateNFTView(viewModel: CreateNFTViewModel(service: service))
+            CreateNFTView(viewModel: CreateNFTViewModel(service: service, appState: appState))
         }
     }
 }
