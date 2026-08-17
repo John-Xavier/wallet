@@ -37,13 +37,15 @@ final class MyWalletsViewModel: ObservableObject {
         do {
             
             async let nfts = service.fetchMyNFTs().sorted {
-                ($0.purchasedAt ?? .distantFuture) > ($1.purchasedAt ?? .distantFuture)
+                ($0.createdAt ?? .distantFuture) > ($1.createdAt ?? .distantFuture)
             }
 
             async let coins = service.fetchWallet()
             
+            let sorted = try await nfts
+            print("NFT order:", sorted.prefix(5).map { "\($0.title) — \($0.createdAt?.description ?? "nil")" })
             
-            state = .loaded(nfts: try await nfts, coins: try await coins)
+            state = .loaded(nfts: sorted, coins: try await coins)
         } catch {
             state = .failed((error as? APIError)?.errorDescription ?? "Couldn't load your wallet.")
         }

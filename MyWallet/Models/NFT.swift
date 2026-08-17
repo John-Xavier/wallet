@@ -20,6 +20,7 @@ struct NFT: Decodable, Identifiable, Hashable {
     let imageUrl: String
     let available: Bool
     let purchasedAt: Date?
+    let createdAt: Date?
     
     var formattedPrice: String {
         let formatter = NumberFormatter()
@@ -36,7 +37,7 @@ struct NFT: Decodable, Identifiable, Hashable {
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case title, description, price, currency, owner, imageUrl, available, purchasedAt
+        case title, description, price, currency, owner, imageUrl, available, purchasedAt,createdAt
     }
 }
 
@@ -51,7 +52,7 @@ extension NFT {
         owner: "691461156dc97f9ce2987297",
         imageUrl: "https://nodeapi.techbank.live/interview/uploads/seed/Robo.jpg",
         available: true,
-        purchasedAt: nil
+        purchasedAt: nil, createdAt: nil
     )
 }
 #endif
