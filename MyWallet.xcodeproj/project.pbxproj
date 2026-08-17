@@ -48,16 +48,6 @@
 			path = MyWallet;
 			sourceTree = "<group>";
 		};
-		003621BD302DD0FD00D623FC /* MyWalletTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MyWalletTests;
-			sourceTree = "<group>";
-		};
-		003621C7302DD0FD00D623FC /* MyWalletUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = MyWalletUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +79,6 @@
 			isa = PBXGroup;
 			children = (
 				003621AF302DD0FB00D623FC /* MyWallet */,
-				003621BD302DD0FD00D623FC /* MyWalletTests */,
-				003621C7302DD0FD00D623FC /* MyWalletUITests */,
 				003621AE302DD0FB00D623FC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -143,9 +131,6 @@
 			dependencies = (
 				003621BC302DD0FD00D623FC /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				003621BD302DD0FD00D623FC /* MyWalletTests */,
-			);
 			name = MyWalletTests;
 			packageProductDependencies = (
 			);
@@ -165,9 +150,6 @@
 			);
 			dependencies = (
 				003621C6302DD0FD00D623FC /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				003621C7302DD0FD00D623FC /* MyWalletUITests */,
 			);
 			name = MyWalletUITests;
 			packageProductDependencies = (

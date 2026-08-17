@@ -118,7 +118,7 @@ struct NFTDetailView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                ShareLink(item: nft.imageURL ?? URL(string: "https://techbank.com")!) {
+                ShareLink(item: nft.imageURL ?? URL(string: "https://techbank.live")!) {
                     Image("share")
                         .renderingMode(.template)
                         .resizable()

@@ -86,7 +86,6 @@ struct CreateNFTView: View {
         }
     }
     
-    //text field template
     private func field(_ label: String, placeholder: String, text: Binding<String>, required: Bool = false, suffix: String? = nil, multiline: Bool = false, keyboard: UIKeyboardType = .default) -> some View {
         
         VStack(alignment: .leading, spacing: 8) {

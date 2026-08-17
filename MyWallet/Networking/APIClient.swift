@@ -64,10 +64,7 @@ actor APIClient {
             throw APIError.invalidResponse
         }
         
-        print("STATUS:", http.statusCode)
-        print("BODY:", String(data: data, encoding: .utf8)?.prefix(300) ?? "nil")
-        
-        
+
         guard (200...299).contains(http.statusCode) else {
             if let serverError = try? JSONDecoder().decode(ServerErrorResponse.self, from: data) {
                 throw APIError.server(serverError.details?.first ?? serverError.error)

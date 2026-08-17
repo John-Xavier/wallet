@@ -33,9 +33,8 @@ final class CreateNFTViewModel: ObservableObject {
         && Double(price)! > 0
     }
     
-    //create new nft
     func submit() async {
-        guard let image, let data = image.jpegData(compressionQuality: 0.7) else {
+        guard let image, let data = image.jpegUnder() else {
             errorMessage = AlertMessage(text: "Please select an image")
             return
         }

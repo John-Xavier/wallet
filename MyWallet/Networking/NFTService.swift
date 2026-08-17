@@ -43,7 +43,6 @@ final class NFTService: NFTServiceProtocol {
     }
     
     func buyNFT(id: String) async throws {
-        print("buying NFT Id:\(id) ")
         _ = try await client.request(.buyNFT(nftID: id))
     }
     
