@@ -14,38 +14,40 @@ struct NFTCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             
-            AsyncImage(url: nft.imageURL) { phase in
-                switch phase {
-                case .success(let image):
-                     
-                    image.resizable().aspectRatio(contentMode: .fill)
-                case .failure:
-                    Image(systemName: "photo")
-                                        .font(.title2)
-                                        .foregroundStyle(Color.textSecondary)
-                case .empty:
-                     ProgressView()
-                @unknown default:
-                    EmptyView()
+            Color.clear
+                .aspectRatio(1, contentMode: .fit)
+                .overlay {
+                    AsyncImage(url: nft.imageURL) { phase in
+                        switch phase {
+                        case .success(let image):
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        case .failure:
+                            Image(systemName: "photo")
+                                .font(.title2)
+                                .foregroundStyle(Color.textSecondary)
+                        case .empty:
+                            ProgressView()
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
                 }
-            }
-            .frame(height: 140)
-            .frame(maxWidth: .infinity)
-            .clipped()
-            .clipShape(RoundedRectangle(cornerRadius: Metrics.imageRadius))
-            
+                .clipped()
+                .clipShape(RoundedRectangle(cornerRadius: Metrics.imageRadius))
+
             Text(nft.title)
                 .font(.poppins(14, .medium))
+                .lineLimit(1)
                 .foregroundStyle(Color.textPrimary)
             
             Text(nft.formattedPrice)
-                .font(.spaceGrotesk(14))
+                .font(.poppins(14, .semibold))
                 .foregroundStyle(Color.brandBlue)
         }
-        .padding(10)
-        .frame(maxWidth: .infinity, alignment: .leading
-        )
-        .background(Color.white, in: RoundedRectangle(cornerRadius: Metrics.cardRadius))
+        .padding(.bottom, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

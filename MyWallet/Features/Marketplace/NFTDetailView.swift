@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct NFTDetailView: View {
     
     @EnvironmentObject private var appState: AppState
@@ -25,24 +26,28 @@ struct NFTDetailView: View {
         VStack(spacing: 0) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    AsyncImage(url: nft.imageURL) { phase in
-                        switch phase {
-                        case .success(let image):
-                             
-                            image.resizable().aspectRatio(contentMode: .fill)
-                        case .failure:
-                            Image(systemName: "photo")
-                                                .font(.title2)
-                                                .foregroundStyle(Color.textSecondary)
-                        case .empty:
-                             ProgressView()
-                        @unknown default:
-                            EmptyView()
+                    Color.clear
+                        .frame(height: 365)
+                        .overlay {
+                            AsyncImage(url: nft.imageURL) { phase in
+                                switch phase {
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                case .failure:
+                                    Image(systemName: "photo")
+                                        .font(.largeTitle)
+                                        .foregroundStyle(Color.textSecondary)
+                                case .empty:
+                                    ProgressView()
+                                @unknown default:
+                                    EmptyView()
+                                }
+                            }
                         }
-                    }
-                    .frame(height: 300)
-                    .frame(maxWidth: .infinity)
-                    .clipShape(RoundedRectangle(cornerRadius: Metrics.imageRadius))
+                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: 16))
                     
                     Text(nft.title)
                         .font(.nftTitle)
@@ -52,7 +57,7 @@ struct NFTDetailView: View {
                         .font(.poppins(16))
                         .foregroundStyle(Color.textSecondary)
                     
-                    Divider()
+                    DashedLine()
                     
                     Text("Description")
                         .font(.poppins(16, .medium))
@@ -102,6 +107,24 @@ struct NFTDetailView: View {
             }
             .presentationDetents([.height(280)])
         }
+        .alert(item: $viewModel.errorMessage) { message in
+            Alert(title: Text("Purchase Failed"),
+                    message: Text(message.text),
+                    dismissButton: .default(Text("OK")))
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                ShareLink(item: nft.imageURL ?? URL(string: "https://techbank.com")!) {
+                    Image("share")
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 22, height: 22)
+                        .foregroundStyle(Color.textPrimary)
+                }
+            }
+        }
+       
 
         
     }

@@ -22,7 +22,9 @@ struct MarketPlaceView: View {
         Group {
             switch viewModel.state {
             case .loading:
+                Spacer()
                 ProgressView()
+                Spacer()
             case .loaded(let items):
                 ScrollView {
                     LazyVGrid(columns: columns, spacing: Metrics.gridSpacing) {

@@ -20,7 +20,6 @@ struct MyWalletsView: View {
     
     var body: some View {
             
-            
             VStack(spacing: 16) {
 
                 HStack(spacing: 8){
@@ -60,8 +59,8 @@ struct MyWalletsView: View {
                         } else {
                             ScrollView {
                                 LazyVGrid(columns: columns, spacing: Metrics.gridSpacing) {
-                                    ForEach(nfts) {
-                                        NFTCard(nft: $0)
+                                    ForEach(nfts) { nft in
+                                        NFTCard(nft: nft)
                                     }
                                 }.padding(.horizontal, Metrics.padding)
                             }

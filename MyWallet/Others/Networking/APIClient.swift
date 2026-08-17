@@ -47,11 +47,7 @@ actor APIClient {
     }
     
     private func perform(_ endpoint:Endpoint) async throws -> Data {
-        
-        if Config.useMockData, let mock = MockData.data(for: endpoint) {
-            try await Task.sleep(for: .milliseconds(400))
-            return mock
-        }
+
         
         var components = URLComponents(url: Config.baseURL.appendingPathComponent(endpoint.path), resolvingAgainstBaseURL: false)!
         components.queryItems = endpoint.queryItems

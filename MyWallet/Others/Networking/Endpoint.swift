@@ -51,7 +51,7 @@ nonisolated enum Endpoint {
     var body: [String: String]? {
         switch self {
         case .buyNFT(let nftID):
-            return ["email": Config.email, "userid": Config.userID, "nftid": nftID]
+            return ["email": Config.email, "userid": Config.userID, "nft_id": nftID]
         default:
             return nil
         }

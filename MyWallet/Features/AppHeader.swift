@@ -27,10 +27,11 @@ struct AppHeader: View {
             VStack(alignment: .leading, spacing: 12) {
                 Circle()
                 .fill(Color.white.opacity(0.6))
-                .frame(width: 44, height: 44)
+                .frame(width: 36, height: 36)
                 .overlay(
-                    Image(systemName: "person.fill")
-                    .foregroundStyle(Color.textSecondary)
+                    Image(systemName: "person")
+                        .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(Color.textPrimary)
                 )
 
                     Text("Jane Cooper").font(.poppins(24, .medium))

@@ -15,8 +15,10 @@ final class NFTService: NFTServiceProtocol {
     }
     
     func createNFT(image: Data, title: String, description: String, price: String) async throws {
-        _ = try await client.uploadNFT(image: image, title: title,
+
+           _ = try await client.uploadNFT(image: image, title: title,
                                        description: description, price: price)
+        
     }
     
     func fetchProducts() async throws -> [NFT] {
@@ -33,6 +35,7 @@ final class NFTService: NFTServiceProtocol {
     }
     
     func buyNFT(id: String) async throws {
+        print("buying NFT Id:\(id) ")
         _ = try await client.request(.buyNFT(nftID: id))
     }
     

@@ -7,7 +7,6 @@
 import Foundation
 
 nonisolated enum Config{
-    static let useMockData = true
     static let baseURL = URL(string: "https://nodeapi.techbank.live/interview")!
     static let apiKey = "user-key"
     static let userID = "user-001"

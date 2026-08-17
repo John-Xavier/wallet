@@ -18,7 +18,7 @@ final class CreateNFTViewModel: ObservableObject {
     
     @Published var isUploading = false
     @Published var showSuccess = false
-    @Published var errorMessage : String?
+    @Published var errorMessage : AlertMessage?
     
     private let service: NFTServiceProtocol
     
@@ -33,9 +33,10 @@ final class CreateNFTViewModel: ObservableObject {
         && Double(price)! > 0
     }
     
+    //create new nft
     func submit() async {
         guard let image, let data = image.jpegData(compressionQuality: 0.7) else {
-            errorMessage = "Please select an image"
+            errorMessage = AlertMessage(text: "Please select an image")
             return
         }
         
@@ -53,7 +54,7 @@ final class CreateNFTViewModel: ObservableObject {
             showSuccess = true
             
         } catch {
-            errorMessage = (error as? APIError)?.errorDescription ?? "Upload failed"
+            errorMessage = AlertMessage(text:(error as? APIError)?.errorDescription ?? "Upload failed")
         }
         
     }

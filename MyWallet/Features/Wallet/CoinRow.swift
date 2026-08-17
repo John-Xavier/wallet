@@ -12,14 +12,24 @@ struct CoinRow: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            Circle()
-                .fill(Color.brandBlue.opacity(0.15))
-                .frame(width: 40, height: 40)
-                .overlay(
-                    Text(String(coin.symbol.prefix(1)))
-                        .font(.poppins(16, .semibold))
-                        .foregroundStyle(Color.brandBlue)
-                )
+            
+            Group {
+                if UIImage(named: coin.symbol.lowercased()) != nil {
+                    Image(coin.symbol.lowercased())
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else {
+                    Circle()
+                        .fill(Color.brandBlue.opacity(0.15))
+                        .overlay(
+                            Text(String(coin.symbol.prefix(1)))
+                                .font(.poppins(16, .semibold))
+                                .foregroundStyle(Color.brandBlue)
+                        )
+                }
+            }
+            .frame(width: 40, height: 40)
+            .clipShape(Circle())
             
             Text(coin.symbol)
                 .font(.poppins(16, .medium))

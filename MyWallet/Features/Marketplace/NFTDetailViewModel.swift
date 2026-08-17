@@ -8,13 +8,18 @@
 import Foundation
 import Combine
 
+struct AlertMessage: Identifiable {
+    let id = UUID()
+    let text: String
+}
+
 @MainActor
 final class NFTDetailViewModel: ObservableObject {
     
     @Published var showConfirm = false
     @Published var isPurchasing = false
     @Published var showSuccess = false
-    @Published var errorMessgae: String?
+    @Published var errorMessage: AlertMessage?
     @Published var usdtBalance: String?
     
     private let service: NFTServiceProtocol
@@ -35,7 +40,8 @@ final class NFTDetailViewModel: ObservableObject {
             showSuccess = true
         } catch {
             showConfirm = false
-            errorMessgae = (error as? APIError)?.errorDescription ?? "Purchase Failed"
+            try? await Task.sleep(for: .milliseconds(200))
+            errorMessage = AlertMessage(text: (error as? APIError)?.errorDescription ?? "Purchase Failed")
         }
     }
     
@@ -48,7 +54,7 @@ final class NFTDetailViewModel: ObservableObject {
 
         } catch {
             //failed to fetch
-            errorMessgae = (error as? APIError)?.errorDescription ?? "Failed to Fetch Balance"
+            errorMessage = AlertMessage(text: (error as? APIError)?.errorDescription ?? "Failed to Fetch Balance")
 
         }
     }

@@ -29,24 +29,24 @@ struct CreateNFTView: View {
                         } else {
                             
                             VStack(spacing: 8) {
-                                Image(systemName: "square.and.arrow.up")
+                                Image("upload")
                                     .font(.title2)
                                 Text("Upload NFT")
                                     .font(.poppins(14))
+                                    .foregroundStyle(Color.textPrimary)
                                 Text("( Type :  png, jpeg )")
                                     .font(.poppins(12))
-                                    .foregroundStyle(Color.textSecondary)
                             }
                             .foregroundStyle(Color.textSecondary)
                         }
                     }
-                    .frame(height: 150)
+                    .frame(height: 180)
                     .frame(maxWidth: .infinity)
                     .clipped()
                     .background(Color(hex: 0xDDDDDD))
-                    .clipShape(RoundedRectangle(cornerRadius: Metrics.cardRadius))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
                     .overlay(
-                        RoundedRectangle(cornerRadius: Metrics.cardRadius)
+                        RoundedRectangle(cornerRadius: 16)
                             .strokeBorder(Color.textSecondary.opacity(0.3), style: StrokeStyle(lineWidth: 1, dash: [6]))
                     )
                 }
@@ -76,10 +76,10 @@ struct CreateNFTView: View {
             }
             .presentationDetents([.height(280)])
         }
-        .alert("Upload Failed", isPresented: .constant(viewModel.errorMessage != nil)) {
-            Button("OK") { viewModel.errorMessage = nil }
-        } message: {
-            Text(viewModel.errorMessage ?? "")
+        .alert(item: $viewModel.errorMessage) { message in
+            Alert(title: Text("Upload Failed"),
+                    message: Text(message.text),
+                    dismissButton: .default(Text("OK")))
         }
     }
     
