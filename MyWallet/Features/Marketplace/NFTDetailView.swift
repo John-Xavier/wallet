@@ -99,6 +99,8 @@ struct NFTDetailView: View {
         .sheet(isPresented: $viewModel.showConfirm) {
             //confirm purchase sheet
             ConfirmPurchaseSheet(nft: nft, viewModel: viewModel).presentationDetents([.height(480)])
+                .presentationBackground(.white)
+
         }
         .sheet(isPresented: $viewModel.showSuccess) {
             PurchaseSuccessView {
@@ -106,6 +108,8 @@ struct NFTDetailView: View {
                 dismiss()
             }
             .presentationDetents([.height(280)])
+            .presentationBackground(.white)     
+
         }
         .alert(item: $viewModel.errorMessage) { message in
             Alert(title: Text(message.title),

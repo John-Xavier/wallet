@@ -47,6 +47,7 @@ extension Font {
     static func poppins(_ size: CGFloat, _ weight: Weight = .regular) -> Font {
         let name: String
         switch weight {
+        case .bold:     name = "Poppins-Bold"
         case .medium:   name = "Poppins-Medium"
         case .semibold: name = "Poppins-SemiBold"
         default:        name = "Poppins-Regular"

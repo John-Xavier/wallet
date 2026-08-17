@@ -11,7 +11,7 @@ struct AppHeader: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("TECHBANK")
-                .font(.poppins(20, .semibold))
+                .font(.poppins(20, .bold))
                 .overlay(
                     LinearGradient(
                         colors: [Color(hex: 0x4A5AFC), Color(hex: 0x9E41FE)],
@@ -21,7 +21,7 @@ struct AppHeader: View {
                 )
                 .mask(
                     Text("TECHBANK")
-                        .font(.poppins(20, .semibold))
+                        .font(.poppins(20, .bold))
                 )
             
             VStack(alignment: .leading, spacing: 12) {

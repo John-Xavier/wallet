@@ -69,12 +69,15 @@ struct CreateNFTView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showPicker) {
             ImagePicker(image: $viewModel.image)
+                .presentationBackground(.white)
+
         }
         .sheet(isPresented: $viewModel.showSuccess) {
             NFTCreatedSuccessView {
                 dismiss()
             }
             .presentationDetents([.height(280)])
+            .presentationBackground(.white)     
         }
         .alert(item: $viewModel.errorMessage) { message in
             Alert(title: Text("Upload Failed"),
