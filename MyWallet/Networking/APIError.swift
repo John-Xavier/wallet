@@ -16,7 +16,7 @@ nonisolated enum APIError : LocalizedError {
     var errorDescription: String?{
         switch self {
         case .server(let message): return message
-        case .decoding: return "Couldnt read the server response."
+        case .decoding: return "Couldn't read the server response."
         case .network: return "Network unavailable. Check your connection."
         case .invalidResponse: return "Something went wrong. Please try again"
         }

@@ -8,6 +8,12 @@
 import SwiftUI
 import Combine
 
+enum Route: Hashable {
+    case nftDetail(NFT)
+    case createNFT
+}
+
+
 @MainActor
 final class Router: ObservableObject {
     @Published var path = NavigationPath()

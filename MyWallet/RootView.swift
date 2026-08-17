@@ -9,9 +9,8 @@ import SwiftUI
 
 struct RootView: View {
     @EnvironmentObject private var appState: AppState
-
-    @StateObject private var router = Router()
-    @StateObject private var walletRouter = Router()
+    @EnvironmentObject private var router: Router
+    
     @State private var selectedTab : MainTab = .marketplace
     private let service: NFTServiceProtocol = NFTService()
     
@@ -36,7 +35,7 @@ struct RootView: View {
                 destination(for: route)
             }
         }
-        .environmentObject(router)
+       
          
     }
     
@@ -53,4 +52,6 @@ struct RootView: View {
 
 #Preview {
     RootView()
+        .environmentObject(AppState())
+        .environmentObject(Router())
 }

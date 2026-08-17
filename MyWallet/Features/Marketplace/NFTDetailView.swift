@@ -108,7 +108,7 @@ struct NFTDetailView: View {
             .presentationDetents([.height(280)])
         }
         .alert(item: $viewModel.errorMessage) { message in
-            Alert(title: Text("Purchase Failed"),
+            Alert(title: Text(message.title),
                     message: Text(message.text),
                     dismissButton: .default(Text("OK")))
         }

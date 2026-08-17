@@ -10,6 +10,7 @@ import Combine
 
 struct AlertMessage: Identifiable {
     let id = UUID()
+    var title: String = "Something went wrong"
     let text: String
 }
 
@@ -41,7 +42,7 @@ final class NFTDetailViewModel: ObservableObject {
         } catch {
             showConfirm = false
             try? await Task.sleep(for: .milliseconds(200))
-            errorMessage = AlertMessage(text: (error as? APIError)?.errorDescription ?? "Purchase Failed")
+            errorMessage = AlertMessage(title: "Purchase Failed",text: (error as? APIError)?.errorDescription ?? "Purchase Failed")
         }
     }
     
@@ -54,7 +55,7 @@ final class NFTDetailViewModel: ObservableObject {
 
         } catch {
             //failed to fetch
-            errorMessage = AlertMessage(text: (error as? APIError)?.errorDescription ?? "Failed to Fetch Balance")
+            errorMessage = AlertMessage(title: "Couldn't Load Balance",text: (error as? APIError)?.errorDescription ?? "Failed to Fetch Balance")
 
         }
     }

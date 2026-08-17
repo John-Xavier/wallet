@@ -7,19 +7,6 @@
 
 import Foundation
 
-protocol NFTServiceProtocol {
-    func createNFT(image: Data, title:String, description: String, price: String) async throws
-    func fetchProducts() async throws -> [NFT]
-    func fetchMyNFTs() async throws -> [NFT]
-    func fetchWallet() async throws -> [Coin]
-    func buyNFT(id: String) async throws
-}
-
-enum Route: Hashable {
-    case nftDetail(NFT)
-    case createNFT
-}
-
 actor APIClient {
     static let shared = APIClient()
     private let session: URLSession = .shared
@@ -80,9 +67,6 @@ actor APIClient {
         print("STATUS:", http.statusCode)
         print("BODY:", String(data: data, encoding: .utf8)?.prefix(300) ?? "nil")
         
-        if let serverError = try? JSONDecoder().decode(ServerErrorResponse.self, from: data) {
-            throw APIError.server(serverError.error)
-        }
         
         guard (200...299).contains(http.statusCode) else {
             if let serverError = try? JSONDecoder().decode(ServerErrorResponse.self, from: data) {
